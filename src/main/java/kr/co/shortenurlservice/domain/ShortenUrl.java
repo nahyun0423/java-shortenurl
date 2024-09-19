@@ -13,10 +13,12 @@ public class ShortenUrl {
     private String originalUrl;
     @Size(min = KEY_LENGTH, max = KEY_LENGTH)
     private String shortKey;
+    private int redirectCount;
 
     public ShortenUrl(String originalUrl) {
         this.originalUrl = originalUrl;
         this.shortKey = generateKey();
+        this.redirectCount = 0;
     }
 
     public ShortenUrl(String shortKey, String originalUrl) {
@@ -33,11 +35,19 @@ public class ShortenUrl {
         return keyBuilder.toString();
     }
 
+    public void increaseRedirectCount() {
+        this.redirectCount++;
+    }
+
     public String getOriginalUrl() {
         return originalUrl;
     }
 
     public String getShortKey() {
         return shortKey;
+    }
+
+    public int getRedirectCount() {
+        return redirectCount;
     }
 }

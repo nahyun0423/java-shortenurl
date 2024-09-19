@@ -14,7 +14,7 @@ public class ShortenUrlRepository {
         urlStorage.put(shortKey, originalUrl);
     }
 
-    public ShortenUrl findByKey(String shortKey){
+    public ShortenUrl findByKey(String shortKey) {
         return new ShortenUrl(shortKey, urlStorage.get(shortKey));
     }
 }

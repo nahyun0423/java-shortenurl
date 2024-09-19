@@ -28,4 +28,10 @@ public class ShortenUrlService {
         ShortenUrlDto shortenUrlDto = ShortenUrlDto.toDto(shortenUrl);
         return shortenUrlDto;
     }
+
+    public String redirectUrl(String shortKey) {
+       ShortenUrl shortenUrl = shortenUrlRepository.findByKey(shortKey);
+       shortenUrl.increaseRedirectCount();
+        return shortenUrl.getOriginalUrl();
+    }
 }

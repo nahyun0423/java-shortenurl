@@ -20,13 +20,20 @@ public class ShortenUrlRestController {
         //입력
         @RequestMapping(value = "/shortenUrl", method = RequestMethod.POST)
         public ShortenUrlDto createShortenUrl(@RequestBody String originalUrl) {
-           return shortenUrlService.createShortUrl(originalUrl);
+            return shortenUrlService.createShortUrl(originalUrl);
         }
 
         //조회
         @RequestMapping(value = "/{shortenUrlKey}", method = RequestMethod.GET)
         public ShortenUrlDto findShortenUrl(@PathVariable String shortKey) {
             return shortenUrlService.findByKey(shortKey);
+        }
+
+        //리다이렉트
+        @RequestMapping(value = "/redirect/{shortenUrlKey}", method = RequestMethod.GET)
+        public ResponseEntity<?> redirectUrl(@PathVariable String shortKey) {
+            String originalUrl = shortenUrlService.redirectUrl(shortKey);
+            return ResponseEntity.status(302).header("Location", originalUrl).build();
         }
     }
 }
