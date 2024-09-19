@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 public class ShortenUrlRestController {
 
     @RestController
-    @RequestMapping("/api/shortener")
     public class UrlShortenerController {
 
         private ShortenUrlService shortenUrlService;
@@ -18,16 +17,16 @@ public class ShortenUrlRestController {
             this.shortenUrlService = shortenUrlService;
         }
 
-        @RequestMapping(value = "/shorten", method = RequestMethod.POST)
-        public ShortenUrlDto shortenUrl(@RequestParam String url) {
-            String shortKey = shortenUrlService.createShortUrl(url);
-            return shortenUrlService.add(shortKey);
+        //입력
+        @RequestMapping(value = "/shortenUrl", method = RequestMethod.POST)
+        public ShortenUrlDto createShortenUrl(@RequestBody String originalUrl) {
+           return shortenUrlService.createShortUrl(originalUrl);
         }
 
-        @RequestMapping(value = "/{shortKey}", method = RequestMethod.GET)
-        public ShortenUrlDto redirectUrl(@PathVariable String shortKey) {
-
-
-
+        //조회
+        @RequestMapping(value = "/{shortenUrlKey}", method = RequestMethod.GET)
+        public ShortenUrlDto findShortenUrl(@PathVariable String shortKey) {
+            return shortenUrlService.findByKey(shortKey);
         }
+    }
 }

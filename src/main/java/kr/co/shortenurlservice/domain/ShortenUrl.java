@@ -1,13 +1,18 @@
 package kr.co.shortenurlservice.domain;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.Random;
 
 public class ShortenUrl {
-    private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final String CHARACTERS = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     private static final int KEY_LENGTH = 5;
-    private String originalUrl;
-    private String shortKey;
 
+    @NotNull
+    private String originalUrl;
+    @Size(min = KEY_LENGTH, max = KEY_LENGTH)
+    private String shortKey;
 
     public ShortenUrl(String originalUrl) {
         this.originalUrl = originalUrl;
@@ -22,5 +27,12 @@ public class ShortenUrl {
         }
         return keyBuilder.toString();
     }
-    ///
+
+    public String getOriginalUrl() {
+        return originalUrl;
+    }
+
+    public String getShortKey() {
+        return shortKey;
+    }
 }
