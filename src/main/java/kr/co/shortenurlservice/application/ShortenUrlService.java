@@ -24,5 +24,8 @@ public class ShortenUrlService {
     }
 
     public ShortenUrlDto findByKey(String shortKey) {
+        ShortenUrl shortenUrl = shortenUrlRepository.findByKey(shortKey);
+        ShortenUrlDto shortenUrlDto = ShortenUrlDto.toDto(shortenUrl);
+        return shortenUrlDto;
     }
 }

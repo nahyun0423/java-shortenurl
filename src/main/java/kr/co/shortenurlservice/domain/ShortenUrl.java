@@ -19,6 +19,11 @@ public class ShortenUrl {
         this.shortKey = generateKey();
     }
 
+    public ShortenUrl(String shortKey, String originalUrl) {
+        this.shortKey = shortKey;
+        this.originalUrl = originalUrl;
+    }
+
     private String generateKey() {
         Random random = new Random();
         StringBuilder keyBuilder = new StringBuilder(KEY_LENGTH);
