@@ -19,8 +19,9 @@ public class ShortenUrlRestController {
 
         //입력
         @RequestMapping(value = "/shortenUrl", method = RequestMethod.POST)
-        public ShortenUrlDto createShortenUrl(@RequestBody String originalUrl) {
-            return shortenUrlService.createShortUrl(originalUrl);
+        public ResponseEntity<ShortenUrlDto> createShortenUrl(@RequestBody String originalUrl) {
+            ShortenUrlDto shortenUrlCreateDto = shortenUrlService.createShortUrl(originalUrl);
+            return ResponseEntity.ok(shortenUrlCreateDto);
         }
 
         //조회
