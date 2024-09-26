@@ -18,7 +18,7 @@ public class ShortenUrlService {
 
     public ShortenUrlDto createShortUrl(String url) {
         ShortenUrl shortenUrl = new ShortenUrl(url);
-        shortenUrlRepository.save(shortenUrl.getShortKey(), shortenUrl.getOriginalUrl());
+        shortenUrlRepository.save(shortenUrl);
         ShortenUrlDto savedShortenUrlDto = ShortenUrlDto.toDto(shortenUrl);
         return savedShortenUrlDto;
     }
@@ -30,8 +30,13 @@ public class ShortenUrlService {
     }
 
     public String redirectUrl(String shortKey) {
-       ShortenUrl shortenUrl = shortenUrlRepository.findByKey(shortKey);
-       shortenUrl.increaseRedirectCount();
-        return shortenUrl.getOriginalUrl();
+        ShortenUrl shortenUrl = shortenUrlRepository.findByKey(shortKey);
+
+        if (shortenUrl != null) {
+            shortenUrl.increaseRedirectCount();
+            shortenUrlRepository.save(shortenUrl);
+            return shortenUrl.getOriginalUrl();
+        }
+        return null;
     }
 }

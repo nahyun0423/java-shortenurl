@@ -25,4 +25,16 @@ public class ShortenUrlDto {
         ) ;
         return shortenUrlDto;
     }
+
+    public String getOriginalUrl() {
+        return originalUrl;
+    }
+
+    public String getShortKey() {
+        return shortKey;
+    }
+
+    public int getRedirectCount() {
+        return redirectCount;
+    }
 }

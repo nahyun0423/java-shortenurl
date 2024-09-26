@@ -2,15 +2,19 @@ package kr.co.shortenurlservice.domain;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
 
 import java.util.Random;
 
+@Getter
 public class ShortenUrl {
     private static final String CHARACTERS = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     private static final int KEY_LENGTH = 5;
 
     @NotNull
     private String originalUrl;
+
+    @Getter
     @Size(min = KEY_LENGTH, max = KEY_LENGTH)
     private String shortKey;
     private int redirectCount;
@@ -24,6 +28,7 @@ public class ShortenUrl {
     public ShortenUrl(String shortKey, String originalUrl) {
         this.shortKey = shortKey;
         this.originalUrl = originalUrl;
+        this.redirectCount = getRedirectCount();
     }
 
     private String generateKey() {
@@ -39,15 +44,4 @@ public class ShortenUrl {
         this.redirectCount++;
     }
 
-    public String getOriginalUrl() {
-        return originalUrl;
-    }
-
-    public String getShortKey() {
-        return shortKey;
-    }
-
-    public int getRedirectCount() {
-        return redirectCount;
-    }
 }
