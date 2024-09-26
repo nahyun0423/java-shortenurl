@@ -53,3 +53,18 @@
 - 조회 버튼
 - 조회된 정보
 - 추후 이미지 업로드 예정
+
+-----
+
+### ☑️ PostMan 응답 화면
+- 입력
+  ![image](https://github.com/user-attachments/assets/9e793b44-025d-4365-b894-60155b6be2bc)
+
+
+- 리다이렉트
+![image](https://github.com/user-attachments/assets/d42b3854-359d-422d-b1a1-74cb32956527)
+![image](https://github.com/user-attachments/assets/4403254d-1234-4b3c-9ec4-2742dfd78661)
+![image](https://github.com/user-attachments/assets/c730edc6-d2f0-4c7a-a7a1-821a1af5e18c)
+
+- 조회
+![image](https://github.com/user-attachments/assets/2dfd9161-7bdb-4c85-8b3d-8a98f13857bd)
