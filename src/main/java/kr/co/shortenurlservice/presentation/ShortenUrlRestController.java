@@ -1,9 +1,12 @@
 package kr.co.shortenurlservice.presentation;
 
+import jakarta.validation.Valid;
 import kr.co.shortenurlservice.application.ShortenUrlService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class ShortenUrlRestController {
@@ -17,7 +20,7 @@ public class ShortenUrlRestController {
 
     //입력
     @RequestMapping(value = "/shortenUrl", method = RequestMethod.POST)
-    public ResponseEntity<ShortenUrlDto> createShortenUrl(@RequestBody ShortenUrlRequestDto requestDto) {
+    public ResponseEntity<ShortenUrlDto> createShortenUrl(@Valid @RequestBody ShortenUrlRequestDto requestDto) {
         ShortenUrlDto shortenUrlCreateDto = shortenUrlService.createShortUrl(requestDto.getOriginalUrl());
         return ResponseEntity.ok(shortenUrlCreateDto);
     }
