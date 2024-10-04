@@ -1,5 +1,6 @@
 package kr.co.shortenurlservice.application;
 
+import kr.co.shortenurlservice.domain.ShortKeyGenerator;
 import kr.co.shortenurlservice.domain.ShortenUrl;
 import kr.co.shortenurlservice.infrastructure.ShortenUrlRepository;
 import kr.co.shortenurlservice.presentation.ShortenUrlDto;
@@ -11,11 +12,13 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class ShortenUrlService {
 
-    private ShortenUrlRepository shortenUrlRepository;
+    private final ShortenUrlRepository shortenUrlRepository;
+    private final ShortKeyGenerator shortKeyGenerator;
 
     @Autowired
-    public ShortenUrlService(ShortenUrlRepository shortenUrlRepository) {
+    public ShortenUrlService(ShortenUrlRepository shortenUrlRepository, ShortKeyGenerator shortKeyGenerator) {
         this.shortenUrlRepository = shortenUrlRepository;
+        this.shortKeyGenerator = shortKeyGenerator;
     }
 
     public ShortenUrlDto createShortUrl(String url) {
@@ -23,7 +26,7 @@ public class ShortenUrlService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "URL 입력이 잘못되었습니다");
         }
 
-        ShortenUrl shortenUrl = new ShortenUrl(url);
+        ShortenUrl shortenUrl = new ShortenUrl(url, shortKeyGenerator);
         shortenUrlRepository.save(shortenUrl);
         ShortenUrlDto savedShortenUrlDto = ShortenUrlDto.toDto(shortenUrl);
         return savedShortenUrlDto;
@@ -35,7 +38,6 @@ public class ShortenUrlService {
         if (shortenUrl == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 short key 입니다.");
         }
-
         return ShortenUrlDto.toDto(shortenUrl);
     }
 
