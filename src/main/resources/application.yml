@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:8080/shorten_url
+    username: root
+    password: nahyun
+  jpa:
+    properties:
+     hibernate:
+      dialect: org.hibernate.dialect.MySQLDialect
+  profiles:
+    active: test
+application:
+  name: shortenurlservice
+
+
