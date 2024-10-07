@@ -1,6 +1,5 @@
 package kr.co.shortenurlservice;
 
-import kr.co.shortenurlservice.domain.RandomShortKeyGenerator;
 import kr.co.shortenurlservice.domain.ShortKeyGenerator;
 import kr.co.shortenurlservice.domain.ShortenUrl;
 import org.junit.jupiter.api.BeforeEach;
