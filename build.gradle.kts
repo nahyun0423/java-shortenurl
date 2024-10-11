@@ -1,3 +1,4 @@
+
 plugins {
 	java
 	id("org.springframework.boot") version "3.3.3"
@@ -27,8 +28,11 @@ dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-jdbc")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation ("org.mockito:mockito-core:5.8.0")
 }
 
-tasks.withType<Test> {
+tasks.test {
 	useJUnitPlatform()
 }
+
+

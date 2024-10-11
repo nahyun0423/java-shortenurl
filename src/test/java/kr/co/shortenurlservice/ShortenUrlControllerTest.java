@@ -3,7 +3,7 @@ package kr.co.shortenurlservice;
 import kr.co.shortenurlservice.application.ShortenUrlService;
 import kr.co.shortenurlservice.presentation.ShortenUrlDto;
 import kr.co.shortenurlservice.presentation.ShortenUrlRequestDto;
-import kr.co.shortenurlservice.presentation.ShortenUrlRestController;
+import kr.co.shortenurlservice.presentation.ShortenUrlController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,12 +14,12 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-public class ShortenUrlRestControllerTest {
+public class ShortenUrlControllerTest {
     @Mock
     private ShortenUrlService shortenUrlService;
 
     @InjectMocks
-    private ShortenUrlRestController shortenUrlRestController;
+    private ShortenUrlController shortenUrlController;
 
     @BeforeEach
     public void setup() {
@@ -32,7 +32,7 @@ public class ShortenUrlRestControllerTest {
         ShortenUrlRequestDto requestDto = new ShortenUrlRequestDto();
 
         when(shortenUrlService.createShortUrl(requestDto.getOriginalUrl())).thenReturn(shortenUrlDto);
-        ResponseEntity<ShortenUrlDto> response = shortenUrlRestController.createShortenUrl(requestDto);
+        ResponseEntity<ShortenUrlDto> response = shortenUrlController.createShortenUrl(requestDto);
 
         assertEquals(200, response.getStatusCodeValue());
         assertNotNull(response.getBody());
@@ -44,7 +44,7 @@ public class ShortenUrlRestControllerTest {
         ShortenUrlDto shortenUrlDto = new ShortenUrlDto("http://example.com", "abc12", 0);
 
         when(shortenUrlService.findByKey("abc12")).thenReturn(shortenUrlDto);
-        ShortenUrlDto result = shortenUrlRestController.findShortenUrl("abc12");
+        ShortenUrlDto result = shortenUrlController.findShortenUrl("abc12");
 
         assertNotNull(result);
         assertEquals("abc12", result.getShortKey());
@@ -53,7 +53,7 @@ public class ShortenUrlRestControllerTest {
     @Test
     public void 단축URL_리다이렉트_성공() {
         when(shortenUrlService.redirectUrl("abc12")).thenReturn("http://example.com");
-        ResponseEntity<?> response = shortenUrlRestController.redirectUrl("abc12");
+        ResponseEntity<?> response = shortenUrlController.redirectUrl("abc12");
 
         assertEquals(302, response.getStatusCodeValue());
         assertTrue(response.getHeaders().containsKey("Location"));
@@ -63,7 +63,7 @@ public class ShortenUrlRestControllerTest {
     @Test
     public void 단축URL_리다이렉트_실패() {
         when(shortenUrlService.redirectUrl("nonExistKey")).thenReturn(null);
-        ResponseEntity<?> response = shortenUrlRestController.redirectUrl("nonExistKey");
+        ResponseEntity<?> response = shortenUrlController.redirectUrl("nonExistKey");
 
         assertEquals(404, response.getStatusCodeValue());
     }

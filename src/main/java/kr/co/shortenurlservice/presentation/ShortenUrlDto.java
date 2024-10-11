@@ -33,8 +33,4 @@ public class ShortenUrlDto {
     public String getShortKey() {
         return shortKey;
     }
-
-    public int getRedirectCount() {
-        return redirectCount;
-    }
 }

@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-public class ShortenUrlRestController {
+public class ShortenUrlController {
 
     private ShortenUrlService shortenUrlService;
 
     @Autowired
-    public ShortenUrlRestController(ShortenUrlService shortenUrlService) {
+    public ShortenUrlController(ShortenUrlService shortenUrlService) {
         this.shortenUrlService = shortenUrlService;
     }
 
@@ -27,6 +29,12 @@ public class ShortenUrlRestController {
     @RequestMapping(value = "/check/{shortKey}", method = RequestMethod.GET)
     public ShortenUrlDto findShortenUrl(@PathVariable String shortKey) {
         return shortenUrlService.findByKey(shortKey);
+    }
+
+    @GetMapping("/urls")
+    public ResponseEntity<List<ShortenUrlDto>> findAllShortenUrl() {
+        List<ShortenUrlDto> urls = shortenUrlService.findAllUrls();
+        return ResponseEntity.ok(urls);
     }
 
     //리다이렉트
