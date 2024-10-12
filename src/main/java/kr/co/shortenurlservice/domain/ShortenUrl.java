@@ -11,8 +11,6 @@ public class ShortenUrl {
 
     @NotNull
     private String originalUrl;
-
-    @Getter
     private String shortKey;
     private int redirectCount;
 

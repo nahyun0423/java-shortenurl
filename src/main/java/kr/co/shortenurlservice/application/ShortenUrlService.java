@@ -3,9 +3,10 @@ package kr.co.shortenurlservice.application;
 import kr.co.shortenurlservice.domain.RandomShortKeyGenerator;
 import kr.co.shortenurlservice.domain.ShortKeyGenerator;
 import kr.co.shortenurlservice.domain.ShortenUrl;
-import kr.co.shortenurlservice.infrastructure.ShortenUrlRepository;
+import kr.co.shortenurlservice.infrastructure.jpa.ShortenUrlRepository;
 import kr.co.shortenurlservice.presentation.ShortenUrlDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,7 +21,7 @@ public class ShortenUrlService {
     private ShortKeyGenerator shortKeyGenerator;
 
     @Autowired
-    public ShortenUrlService(ShortenUrlRepository shortenUrlRepository) {
+    public ShortenUrlService(@Lazy ShortenUrlRepository shortenUrlRepository) {
         this.shortenUrlRepository = shortenUrlRepository;
     }
 
