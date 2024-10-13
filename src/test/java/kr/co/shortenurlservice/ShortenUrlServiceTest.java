@@ -54,18 +54,18 @@ class ShortenUrlServiceTest {
     public void 단축URL_조회_성공() {
         String shortKey = "abc12";
         ShortenUrl shortenUrl = new ShortenUrl("http://example.com", shortKeyGenerator);
-        Mockito.when(mapShortenUrlRepository.findByKey(shortKey)).thenReturn(shortenUrl);
+        Mockito.when(mapShortenUrlRepository.findByShortKey(shortKey)).thenReturn(shortenUrl);
         ShortenUrlDto shortenUrlDto = shortenUrlService.findByKey(shortKey);
 
         assertNotNull(shortenUrlDto);
         assertEquals(shortKey, shortenUrlDto.getShortKey());
-        Mockito.verify(mapShortenUrlRepository, Mockito.times(1)).findByKey(shortKey);
+        Mockito.verify(mapShortenUrlRepository, Mockito.times(1)).findByShortKey(shortKey);
     }
 
     @Test
     public void 단축URL_조회_실패_존재하지않는_key() {
         String shortKey = "nonExistKey";
-        Mockito.when(mapShortenUrlRepository.findByKey(shortKey)).thenReturn(null);
+        Mockito.when(mapShortenUrlRepository.findByShortKey(shortKey)).thenReturn(null);
         assertThrows(ResponseStatusException.class, () -> shortenUrlService.findByKey(shortKey));
     }
 
@@ -74,7 +74,7 @@ class ShortenUrlServiceTest {
         String shortKey = "abc12";
         String originalUrl = "http://example.com";
         ShortenUrl shortenUrl = new ShortenUrl(originalUrl, shortKeyGenerator);
-        Mockito.when(mapShortenUrlRepository.findByKey(shortKey)).thenReturn(shortenUrl);
+        Mockito.when(mapShortenUrlRepository.findByShortKey(shortKey)).thenReturn(shortenUrl);
         String result = shortenUrlService.redirectUrl(shortKey);
 
         assertEquals(originalUrl, result);
@@ -84,7 +84,7 @@ class ShortenUrlServiceTest {
     @Test
     public void 리다이렉트_URL_실패_존재하지않는_key() {
         String shortKey = "nonExistKey";
-        Mockito.when(mapShortenUrlRepository.findByKey(shortKey)).thenReturn(null);
+        Mockito.when(mapShortenUrlRepository.findByShortKey(shortKey)).thenReturn(null);
         String result = shortenUrlService.redirectUrl(shortKey);
 
         assertNull(result);

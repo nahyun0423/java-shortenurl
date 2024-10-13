@@ -21,7 +21,7 @@ public class MapShortenShortenUrlRepositoryTest {
         ShortenUrl shortenUrl = new ShortenUrl("abc12", "http://example.com");
         mapShortenUrlRepository.save(shortenUrl);
 
-        assertEquals(shortenUrl, mapShortenUrlRepository.findByKey("abc12"));
+        assertEquals(shortenUrl, mapShortenUrlRepository.findByShortKey("abc12"));
     }
 
     @Test
@@ -29,14 +29,14 @@ public class MapShortenShortenUrlRepositoryTest {
         ShortenUrl shortenUrl = new ShortenUrl("abc12", "http://example.com");
         mapShortenUrlRepository.save(shortenUrl);
 
-        ShortenUrl result = mapShortenUrlRepository.findByKey("abc12");
+        ShortenUrl result = mapShortenUrlRepository.findByShortKey("abc12");
         assertNotNull(result);
         assertEquals(shortenUrl, result);
     }
 
     @Test
     public void 존재하지않는_단축URL_조회() {
-        ShortenUrl result = mapShortenUrlRepository.findByKey("nonExistKey");
+        ShortenUrl result = mapShortenUrlRepository.findByShortKey("nonExistKey");
         assertNull(result);
     }
 }

@@ -6,7 +6,6 @@ import kr.co.shortenurlservice.domain.ShortenUrl;
 import kr.co.shortenurlservice.infrastructure.jpa.ShortenUrlRepository;
 import kr.co.shortenurlservice.presentation.ShortenUrlDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,7 +20,7 @@ public class ShortenUrlService {
     private ShortKeyGenerator shortKeyGenerator;
 
     @Autowired
-    public ShortenUrlService(@Lazy ShortenUrlRepository shortenUrlRepository) {
+    public ShortenUrlService(ShortenUrlRepository shortenUrlRepository) {
         this.shortenUrlRepository = shortenUrlRepository;
     }
 
@@ -38,7 +37,7 @@ public class ShortenUrlService {
     }
 
     public ShortenUrlDto findByKey(String shortKey) {
-        ShortenUrl shortenUrl = shortenUrlRepository.findByKey(shortKey);
+        ShortenUrl shortenUrl = shortenUrlRepository.findByShortKey(shortKey);
 
         if (shortenUrl == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 short key 입니다.");
@@ -55,13 +54,14 @@ public class ShortenUrlService {
     }
 
     public String redirectUrl(String shortKey) {
-        ShortenUrl shortenUrl = shortenUrlRepository.findByKey(shortKey);
+        ShortenUrl shortenUrl = shortenUrlRepository.findByShortKey(shortKey);
 
         if (shortenUrl != null) {
             shortenUrl.increaseRedirectCount();
             shortenUrlRepository.save(shortenUrl);
             return shortenUrl.getOriginalUrl();
         }
+
         return null;
     }
 }

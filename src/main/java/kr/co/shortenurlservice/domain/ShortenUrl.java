@@ -1,14 +1,24 @@
 package kr.co.shortenurlservice.domain;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.regex.Pattern;
 
+import static lombok.AccessLevel.PROTECTED;
+
 @Getter
+@Entity
+@Table(name = "shorten_url")
+@NoArgsConstructor(access = PROTECTED)
 public class ShortenUrl {
     private static final Pattern URL_PATTERN = Pattern.compile("^(http|https)://.*$");
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotNull
     private String originalUrl;
     private String shortKey;

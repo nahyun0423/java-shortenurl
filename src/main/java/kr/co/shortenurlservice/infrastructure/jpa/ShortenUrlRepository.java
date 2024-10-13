@@ -8,6 +8,8 @@ import java.util.List;
 @Repository
 public interface ShortenUrlRepository {
     void save(ShortenUrl shortenUrl);
-    ShortenUrl findByKey(String shortKey);
+
+    ShortenUrl findByShortKey(String shortKey);
+
     List<ShortenUrl> findAll();
 }

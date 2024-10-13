@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ShortenUrlJpaRepository extends JpaRepository<ShortenUrl, Long> {
-    ShortenUrl findByKey(String shortKey);
+    ShortenUrl findByShortKey(String shortKey);
     List<ShortenUrl> findAll();
 }

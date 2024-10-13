@@ -20,7 +20,7 @@ public class MapShortenShortenUrlRepository implements ShortenUrlRepository {
         urlStorage.put(shortenUrl.getShortKey(), shortenUrl);
     }
 
-    public ShortenUrl findByKey(String shortKey) {
+    public ShortenUrl findByShortKey(String shortKey) {
         return urlStorage.get(shortKey);
     }
 

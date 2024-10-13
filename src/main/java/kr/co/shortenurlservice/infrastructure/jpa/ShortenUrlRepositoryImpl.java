@@ -12,17 +12,18 @@ import java.util.List;
 @RequiredArgsConstructor
 @Primary
 @Profile("prod")
-public class ShortenUrlJpaRepositoryImpl implements ShortenUrlRepository {
+public class ShortenUrlRepositoryImpl implements ShortenUrlRepository {
 
     private final ShortenUrlJpaRepository shortenUrlJpaRepository;
 
     @Override
     public void save(ShortenUrl shortenUrl) {
+        shortenUrlJpaRepository.save(shortenUrl);
     }
 
     @Override
-    public ShortenUrl findByKey(String shortKey) {
-        return shortenUrlJpaRepository.findByKey(shortKey);
+    public ShortenUrl findByShortKey(String shortKey) {
+        return shortenUrlJpaRepository.findByShortKey(shortKey);
     }
 
     @Override

@@ -2,7 +2,9 @@ package kr.co.shortenurlservice.presentation;
 
 import jakarta.validation.constraints.NotNull;
 import kr.co.shortenurlservice.domain.ShortenUrl;
+import lombok.Getter;
 
+@Getter
 public class ShortenUrlDto {
     @NotNull
     private String originalUrl;
@@ -22,15 +24,7 @@ public class ShortenUrlDto {
                 shortenUrl.getOriginalUrl(),
                 shortenUrl.getShortKey(),
                 shortenUrl.getRedirectCount()
-        ) ;
+        );
         return shortenUrlDto;
-    }
-
-    public String getOriginalUrl() {
-        return originalUrl;
-    }
-
-    public String getShortKey() {
-        return shortKey;
     }
 }
