@@ -4,15 +4,13 @@ import kr.co.shortenurlservice.domain.ShortenUrl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 @RequiredArgsConstructor
 @Primary
 @Profile("prod")
-public class ShortenUrlRepositoryImpl implements ShortenUrlRepository {
+public class DatabaseShortenUrlRepository implements ShortenUrlRepository {
 
     private final ShortenUrlJpaRepository shortenUrlJpaRepository;
 

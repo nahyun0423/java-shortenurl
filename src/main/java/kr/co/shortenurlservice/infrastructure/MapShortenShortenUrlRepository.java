@@ -3,14 +3,12 @@ package kr.co.shortenurlservice.infrastructure;
 import kr.co.shortenurlservice.domain.ShortenUrl;
 import kr.co.shortenurlservice.infrastructure.jpa.ShortenUrlRepository;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Repository
 @Profile("test")
 public class MapShortenShortenUrlRepository implements ShortenUrlRepository {
 
