@@ -41,9 +41,11 @@ public class ShortenUrlController {
     @RequestMapping(value = "/{shortKey}", method = RequestMethod.GET)
     public ResponseEntity<?> redirectUrl(@PathVariable String shortKey) {
         String originalUrl = shortenUrlService.redirectUrl(shortKey);
+
         if (originalUrl != null) {
             return ResponseEntity.status(302).header("Location", originalUrl).build();
         }
+
         return ResponseEntity.notFound().build();
     }
 }

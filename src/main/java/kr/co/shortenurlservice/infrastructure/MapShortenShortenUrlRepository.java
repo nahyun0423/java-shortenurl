@@ -27,4 +27,9 @@ public class MapShortenShortenUrlRepository implements ShortenUrlRepository {
         return urlStorage.values().stream()
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteAll() {
+        urlStorage.clear();
+    }
 }

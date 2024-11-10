@@ -26,6 +26,7 @@ public class ShortenUrlService {
 
     public ShortenUrlDto createShortUrl(String url) {
         shortKeyGenerator = new RandomShortKeyGenerator();
+
         if (url == null || url.trim().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "URL 입력이 잘못되었습니다.");
         }
@@ -42,6 +43,7 @@ public class ShortenUrlService {
         if (shortenUrl == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 short key 입니다.");
         }
+
         return ShortenUrlDto.toDto(shortenUrl);
     }
 

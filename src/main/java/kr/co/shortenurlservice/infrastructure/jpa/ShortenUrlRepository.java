@@ -12,4 +12,6 @@ public interface ShortenUrlRepository {
     ShortenUrl findByShortKey(String shortKey);
 
     List<ShortenUrl> findAll();
+
+    void deleteAll();
 }
