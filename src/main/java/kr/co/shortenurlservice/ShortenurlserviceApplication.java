@@ -13,7 +13,6 @@ import java.sql.Connection;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "kr.co.shortenurlservice.infrastructure.jpa")
 public class ShortenurlserviceApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ShortenurlserviceApplication.class, args);
     }

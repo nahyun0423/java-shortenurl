@@ -11,7 +11,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Getter
 @Entity
-@Table(name = "shorten_url")
+@Table(name = "shorten")
 @NoArgsConstructor(access = PROTECTED)
 public class ShortenUrl {
     private static final Pattern URL_PATTERN = Pattern.compile("^(http|https)://.*$");

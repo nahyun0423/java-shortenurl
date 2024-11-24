@@ -9,5 +9,4 @@ public class ShortenUrlRequestDto {
     public String getOriginalUrl() {
         return originalUrl;
     }
-
 }

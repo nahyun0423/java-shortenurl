@@ -1,6 +1,7 @@
 package kr.co.shortenurlservice.presentation;
 
 import jakarta.validation.Valid;
+import kr.co.shortenurlservice.application.CheckIndex;
 import kr.co.shortenurlservice.application.ShortenUrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,18 +13,22 @@ import java.util.List;
 public class ShortenUrlController {
 
     private ShortenUrlService shortenUrlService;
+    private CheckIndex checkIndex;
 
     @Autowired
-    public ShortenUrlController(ShortenUrlService shortenUrlService) {
+    public ShortenUrlController(ShortenUrlService shortenUrlService, CheckIndex checkIndex) {
         this.shortenUrlService = shortenUrlService;
+        this.checkIndex = checkIndex;
     }
 
     //입력
     @RequestMapping(value = "/shortenUrl", method = RequestMethod.POST)
     public ResponseEntity<ShortenUrlDto> createShortenUrl(@Valid @RequestBody ShortenUrlRequestDto requestDto) {
         ShortenUrlDto shortenUrlCreateDto = shortenUrlService.createShortUrl(requestDto.getOriginalUrl());
+        checkIndex.testToIndex();
         return ResponseEntity.ok(shortenUrlCreateDto);
     }
+
 
     //조회
     @RequestMapping(value = "/check/{shortKey}", method = RequestMethod.GET)

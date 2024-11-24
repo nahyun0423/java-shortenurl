@@ -1,17 +1,12 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/url
+    url: jdbc:mysql://localhost:3306/mysql
     username: root
-    password: nahyun
+    password: yourpassword
   jpa:
-    open-in-view: false
-  #    hibernate:
-  #      ddl-auto: update
-  #    properties:
-  #     hibernate:
-  #      dialect: org.hibernate.dialect.MySQLDialect
-  #      show-sql: true
+    hibernate:
+      ddl-auto: create-drop
   profiles:
     active: prod
 application:
